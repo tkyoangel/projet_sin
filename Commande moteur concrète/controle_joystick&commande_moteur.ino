@@ -10,23 +10,25 @@ int ENB = 8;
 int Calibrage_Button = 9;
 
 void setup() {
-    Serial.begin(9600);
+  Serial.begin(9600);
 }
 
 void loop() {
-    if(digitalRead(Calibrage_Button)){   // calibrage du joystick
-        int ValeurHorizontale_Milieu = 0;
-        int ValeurVerticale_Milieu = 0;
-    
-        for ( int i = 0; i++; i<150){
-            int ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
-            int ValeurVerticale_Milieu += analogRead(VerticalAxis);
-        }
+  if (digitalRead(SELpress)) {  // calibrage du joystick
+    long ValeurHorizontale_Milieu = 0;
+    long ValeurVerticale_Milieu = 0;
+
+    for (int i = 0; i++; i < 150) {
+      ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
+      ValeurVerticale_Milieu += analogRead(VerticalAxis);
+    }
     ValeurHorizontale_Milieu /= 150;
     ValeurVerticale_Milieu /= 150;
-    Serial.print("Valeure Horizontale Calibrée :"); Serial.print(ValeurHorizontale_Milieu);
-    Serial.print("Valeur Verticale Calibrée :"); Serial.print(ValeurVerticale_Milieu);
-    }
-    int VerticalValue = analogRead(VerticalAxis);
-    int HorizontalValue = analogRead(HorizontalAxis);
+    Serial.println("Valeure Horizontale Calibree :");
+    Serial.print(ValeurHorizontale_Milieu);
+    Serial.println("Valeur Verticale Calibree :");
+    Serial.print(ValeurVerticale_Milieu);
+  }
+  int VerticalValue = analogRead(VerticalAxis);
+  int HorizontalValue = analogRead(HorizontalAxis);
 }
