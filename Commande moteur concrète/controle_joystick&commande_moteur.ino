@@ -14,14 +14,19 @@ void setup() {
 }
 
 void loop() {
-    if(digitalRead(Calibrage_Button)==1){   // Calibrage du joystick
-        int ValeurHorizontale_Milieu = analogRead(HorizontalAxis);
-        int ValeurVerticale_Milieu = analogRead(VerticalAxis);
+    if(digitalRead(Calibrage_Button)){   // calibrage du joystick
+        int ValeurHorizontale_Milieu = 0;
+        int ValeurVerticale_Milieu = 0;
+    
+        for ( int i = 0; i++; i<150){
+            int ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
+            int ValeurVerticale_Milieu += analogRead(VerticalAxis);
+        }
+    ValeurHorizontale_Milieu /= 150;
+    ValeurVerticale_Milieu /= 150;
+    Serial.print("Valeure Horizontale Calibrée :"); Serial.print(ValeurHorizontale_Milieu);
+    Serial.print("Valeur Verticale Calibrée :"); Serial.print(ValeurVerticale_Milieu);
     }
     int VerticalValue = analogRead(VerticalAxis);
     int HorizontalValue = analogRead(HorizontalAxis);
-    Serial.println("Valeur verticale :");
-    Serial.println(VerticalValue);
-    Serial.println("Valeur horizontale :");
-    Serial.println(HorizontalValue);
 }
