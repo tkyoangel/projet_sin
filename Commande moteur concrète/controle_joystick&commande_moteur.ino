@@ -1,3 +1,17 @@
+/*
+         _          __________                              _,
+     _.-(_)._     ."          ".      .--""--.          _.-{__}-._
+   .'________'.   | .--------. |    .'        '.      .:-'`____`'-:.
+  [____________] /` |________| `\  /   .'``'.   \    /_.-"`_  _`"-._\
+  /  / .\/. \  \|  / / .\/. \ \  ||  .'/.\/.\'.  |  /`   / .\/. \   `\
+  |  \__/\__/  |\_/  \__/\__/  \_/|  : |_/\_| ;  |  |    \__/\__/    |
+  \            /  \            /   \ '.\    /.' / .-\                /-.
+  /'._  --  _.'\  /'._  --  _.'\   /'. `'--'` .'\/   '._-.__--__.-_.'   \
+ /_   `""""`   _\/_   `""""`   _\ /_  `-./\.-'  _\'.    `""""""""`    .'`\
+(__/    '|    \ _)_|           |_)_/            \__)|        '       |   |
+  |_____'|_____|   \__________/   |              |;`_________'________`;-'
+   '----------'    '----------'   '--------------'`--------------------`
+*/
 int VerticalAxis = A0;
 int HorizontalAxis = A1;
 int SELpress = 2;
@@ -11,10 +25,20 @@ int Calibrage_Button = 9;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(VerticalAxis, INPUT);
+  pinMode(HorizontalAxis, INPUT);
+  pinMode(SELpress, INPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(Calibrage_Button, INPUT);
 }
 
 void loop() {
-  if (digitalRead(SELpress)) {  // calibrage du joystick
+  if (digitalRead(Calibrage_Button)) {  // calibrage du joystick
     long ValeurHorizontale_Milieu = 0;
     long ValeurVerticale_Milieu = 0;
 
@@ -29,6 +53,70 @@ void loop() {
     Serial.println("Valeur Verticale Calibree :");
     Serial.print(ValeurVerticale_Milieu);
   }
+  
   int VerticalValue = analogRead(VerticalAxis);
   int HorizontalValue = analogRead(HorizontalAxis);
+
+  if (VerticalValue==ValeurVerticale_Milieu&&HorizontalValue==ValeurHorizontale_Milieu){ // faire en sorte de pas bouger les moteurs
+    digitalWrite(in1, LOW);digitalWrite(in2, LOW);digitalWrite(in3, LOW);digitalWrite(in4, LOW);
+  }
+
+  if (VerticalValue>ValeurVerticale_Milieu){ // avancer quand le joystick est poussé
+    int PWM_forward_Rmotor = map(PWM_forward_Rmotor, ValeurVerticale_Milieu, 1023, 0, 255);
+    int PWM_forward_Lmotor = map(PWM_forward_Lmotor, ValeurVerticale_Milieu, 1023, 0, 255);
+    analogWrite(in1, PWM_forward_Rmotor);
+    digitalWrite(in2, LOW);
+    analogWrite(in3, PWM_forward_Lmotor);
+    digitalWrite(in4, LOW);
+  }
+
+  if (VerticalValue<ValeurVerticale_Milieu){ // reculer quand le joystick est tiré
+    int PWM_backward_Rmotor = map(PWM_backward_Rmotor, 0, ValeurVerticale_Milieu, 0, 255);
+    int PWM_backward_Lmotor = map(PWM_backward_Lmotor, 0, ValeurVerticale_Milieu, 0, 255);
+    analogWrite(in2, PWM_backward_Lmotor);
+    digitalWrite(in1, LOW);
+    analogWrite(in4, PWM_backward_Rmotor);
+    digitalWrite(in3, LOW);
+  }
 }
+
+/*
+        .--'''''''''--.
+     .'      .---.      '.
+    /    .-----------.    \
+   /        .-----.        \
+   |       .-.   .-.       |
+   |      /   \ /   \      |
+    \    | .-. | .-. |    /
+     '-._| | | | | | |_.-'
+         | '-' | '-' |
+          \___/ \___/
+       _.-'  /   \  `-._
+     .' _.--|     |--._ '.
+     ' _...-|     |-..._ '
+            |     |
+            '.___.'
+              | |
+             _| |_
+            /\( )/\
+           /  ` '  \
+          | |     | |
+          '-'     '-'
+          | |     | |
+          | |     | |
+          | |-----| |
+       .`/  |     | |/`.
+       |    |     |    |
+       '._.'| .-. |'._.'
+             \ | /
+             | | |
+             | | |
+             | | |
+            /| | |\
+          .'_| | |_`.
+          `. | | | .'
+       .    /  |  \    .
+      /o`.-'  / \  `-.`o\
+     /o  o\ .'   `. /o  o\
+     `.___.'       `.___.'
+     */
