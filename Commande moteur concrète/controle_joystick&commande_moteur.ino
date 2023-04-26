@@ -22,6 +22,8 @@ int in3 = 6;
 int in4 = 7;
 int ENB = 8;
 int Calibrage_Button = 9;
+long ValeurHorizontale_Milieu;
+long ValeurVerticale_Milieu;
 
 void setup() {
   Serial.begin(9600);
@@ -39,8 +41,8 @@ void setup() {
 
 void loop() {
   if (!digitalRead(SELpress)) {  // calibrage du joystick
-    long ValeurHorizontale_Milieu = 0;
-    long ValeurVerticale_Milieu = 0;
+    ValeurHorizontale_Milieu = 0;
+    ValeurVerticale_Milieu = 0;
     for (int i = 0; i < 150; i++) {
       ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
       ValeurVerticale_Milieu += analogRead(VerticalAxis);
