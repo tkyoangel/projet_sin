@@ -12,8 +12,8 @@
   |_____'|_____|   \__________/   |              |;`_________'________`;-'
    '----------'    '----------'   '--------------'`--------------------`
 */
-int VerticalAxis = A0;
-int HorizontalAxis = A1;
+// int VerticalAxis = A0;
+// int HorizontalAxis = A1;
 int SELpress = 2;
 int ENA = 3;
 int in1 = 4;
@@ -38,11 +38,11 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(Calibrage_Button)) {  // calibrage du joystick
+  if (!digitalRead(Calibrage_Button)) {  // calibrage du joystick
     long ValeurHorizontale_Milieu = 0;
     long ValeurVerticale_Milieu = 0;
 
-    for (int i = 0; i++; i < 150) {
+    for (int i = 0; i < 150; i++) {
       ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
       ValeurVerticale_Milieu += analogRead(VerticalAxis);
     }
