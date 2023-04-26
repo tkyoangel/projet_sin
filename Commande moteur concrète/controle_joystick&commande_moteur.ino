@@ -12,8 +12,8 @@
   |_____'|_____|   \__________/   |              |;`_________'________`;-'
    '----------'    '----------'   '--------------'`--------------------`
 */
-// int VerticalAxis = A0;
-// int HorizontalAxis = A1;
+int VerticalAxis = A0;
+int HorizontalAxis = A1;
 int SELpress = 2;
 int ENA = 3;
 int in1 = 4;
@@ -25,8 +25,8 @@ int Calibrage_Button = 9;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(VerticalAxis, INPUT);
-  pinMode(HorizontalAxis, INPUT);
+  //pinMode(VerticalAxis, INPUT);
+  //pinMode(HorizontalAxis, INPUT);
   pinMode(SELpress, INPUT);
   pinMode(ENA, OUTPUT);
   pinMode(in1, OUTPUT);
@@ -38,10 +38,9 @@ void setup() {
 }
 
 void loop() {
-  if (!digitalRead(Calibrage_Button)) {  // calibrage du joystick
+  if (!digitalRead(SELpress)) {  // calibrage du joystick
     long ValeurHorizontale_Milieu = 0;
     long ValeurVerticale_Milieu = 0;
-
     for (int i = 0; i < 150; i++) {
       ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
       ValeurVerticale_Milieu += analogRead(VerticalAxis);
@@ -53,6 +52,7 @@ void loop() {
     Serial.println("Valeur Verticale Calibree :");
     Serial.print(ValeurVerticale_Milieu);
   }
+  /*
   
   int VerticalValue = analogRead(VerticalAxis);
   int HorizontalValue = analogRead(HorizontalAxis);
@@ -77,7 +77,7 @@ void loop() {
     digitalWrite(in1, LOW);
     analogWrite(in4, PWM_backward_Rmotor);
     digitalWrite(in3, LOW);
-  }
+  } */
 }
 
 /*
