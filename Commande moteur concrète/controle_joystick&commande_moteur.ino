@@ -27,7 +27,7 @@ void setup() {
   Serial.begin(9600);
   //pinMode(VerticalAxis, INPUT);
   //pinMode(HorizontalAxis, INPUT);
-  pinMode(SELpress, INPUT);
+  pinMode(SELpress, INPUT_PULLUP);
   pinMode(ENA, OUTPUT);
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
@@ -44,6 +44,7 @@ void loop() {
     for (int i = 0; i < 150; i++) {
       ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
       ValeurVerticale_Milieu += analogRead(VerticalAxis);
+      delay(10);
     }
     ValeurHorizontale_Milieu /= 150;
     ValeurVerticale_Milieu /= 150;
@@ -52,7 +53,7 @@ void loop() {
     Serial.println("Valeur Verticale Calibree :");
     Serial.print(ValeurVerticale_Milieu);
   }
-  /*
+  
   
   int VerticalValue = analogRead(VerticalAxis);
   int HorizontalValue = analogRead(HorizontalAxis);
@@ -77,7 +78,7 @@ void loop() {
     digitalWrite(in1, LOW);
     analogWrite(in4, PWM_backward_Rmotor);
     digitalWrite(in3, LOW);
-  } */
+  } 
 }
 
 /*
