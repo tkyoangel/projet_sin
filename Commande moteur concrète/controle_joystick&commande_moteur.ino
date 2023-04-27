@@ -27,8 +27,6 @@ long ValeurVerticale_Milieu;
 
 void setup() {
   Serial.begin(9600);
-  //pinMode(VerticalAxis, INPUT);
-  //pinMode(HorizontalAxis, INPUT);
   pinMode(SELpress, INPUT_PULLUP);
   pinMode(ENA, OUTPUT);
   pinMode(in1, OUTPUT);
@@ -36,7 +34,7 @@ void setup() {
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
   pinMode(ENB, OUTPUT);
-  pinMode(Calibrage_Button, INPUT);
+  pinMode(Calibrage_Button, INPUT_PULLUP);
 }
 
 void loop() {
