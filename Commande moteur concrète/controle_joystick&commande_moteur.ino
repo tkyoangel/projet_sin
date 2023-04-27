@@ -44,7 +44,7 @@ void loop() {
     for (int i = 0; i < 150; i++) {
       ValeurHorizontale_Milieu += analogRead(HorizontalAxis);
       ValeurVerticale_Milieu += analogRead(VerticalAxis);
-      delay(10);
+      delay(2);
     }
     ValeurHorizontale_Milieu /= 150;
     ValeurVerticale_Milieu /= 150;
