@@ -38,7 +38,7 @@ void setup() {
 }
 
 void loop() {
-  if (!digitalRead(SELpress)) {  // calibrage du joystick
+  if (!digitalRead(SELpress)) {  // calibrage du joystick mais changer le bouton de calibrage, mettre un bouton à côté
     ValeurHorizontale_Milieu = 0;
     ValeurVerticale_Milieu = 0;
     for (int i = 0; i < 150; i++) {
