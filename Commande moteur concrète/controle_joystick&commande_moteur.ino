@@ -11,6 +11,8 @@
 (__/    '|    \ _)_|           |_)_/            \__)|        '       |   |
   |_____'|_____|   \__________/   |              |;`_________'________`;-'
    '----------'    '----------'   '--------------'`--------------------`
+   
+   !!!! METTRE LE ENA et le ENB pour chaque moteur A et B pour qu'ils marchent ( voir docu shields )
 */
 int VerticalAxis = A0;
 int HorizontalAxis = A1;
