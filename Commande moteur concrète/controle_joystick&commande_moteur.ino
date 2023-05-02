@@ -61,10 +61,12 @@ void loop() {
   int HorizontalValue = analogRead(HorizontalAxis);
 
   if (VerticalValue==ValeurVerticale_Milieu&&HorizontalValue==ValeurHorizontale_Milieu){ // faire en sorte de pas bouger les moteurs
-    digitalWrite(in1, LOW);digitalWrite(in2, LOW);digitalWrite(in3, LOW);digitalWrite(in4, LOW);
+    digitalWrite(in1, LOW);digitalWrite(in2, LOW);digitalWrite(in3, LOW);digitalWrite(in4, LOW);digitalWrite(ENA, LOW);digitalWrite(ENB, LOW);
   }
 
   if (VerticalValue>ValeurVerticale_Milieu){ // avancer quand le joystick est poussé
+    digitalWrite(ENA, HIGH);
+    digitalWrite(ENB, HIGH)
     int PWM_forward_Rmotor = map(PWM_forward_Rmotor, ValeurVerticale_Milieu, 1023, 0, 255);
     int PWM_forward_Lmotor = map(PWM_forward_Lmotor, ValeurVerticale_Milieu, 1023, 0, 255);
     analogWrite(in1, PWM_forward_Rmotor);
@@ -74,6 +76,8 @@ void loop() {
   }
 
   if (VerticalValue<ValeurVerticale_Milieu){ // reculer quand le joystick est tiré
+    digitalWrite(ENA, LOW);
+    digitalWrite(ENB, LOW);
     int PWM_backward_Rmotor = map(PWM_backward_Rmotor, 0, ValeurVerticale_Milieu, 0, 255);
     int PWM_backward_Lmotor = map(PWM_backward_Lmotor, 0, ValeurVerticale_Milieu, 0, 255);
     analogWrite(in2, PWM_backward_Lmotor);
