@@ -76,8 +76,8 @@ void loop() {
   }
 
   if (VerticalValue<ValeurVerticale_Milieu){ // reculer quand le joystick est tiré
-    digitalWrite(ENA, LOW);
-    digitalWrite(ENB, LOW);
+    digitalWrite(ENA, HIGH);
+    digitalWrite(ENB, HIGH);
     int PWM_backward_Rmotor = map(PWM_backward_Rmotor, 0, ValeurVerticale_Milieu, 0, 255);
     int PWM_backward_Lmotor = map(PWM_backward_Lmotor, 0, ValeurVerticale_Milieu, 0, 255);
     analogWrite(in2, PWM_backward_Lmotor);
