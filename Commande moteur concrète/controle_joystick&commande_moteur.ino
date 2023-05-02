@@ -66,7 +66,7 @@ void loop() {
 
   if (VerticalValue>ValeurVerticale_Milieu){ // avancer quand le joystick est poussé
     digitalWrite(ENA, HIGH);
-    digitalWrite(ENB, HIGH)
+    digitalWrite(ENB, HIGH);
     int PWM_forward_Rmotor = map(PWM_forward_Rmotor, ValeurVerticale_Milieu, 1023, 0, 255);
     int PWM_forward_Lmotor = map(PWM_forward_Lmotor, ValeurVerticale_Milieu, 1023, 0, 255);
     analogWrite(in1, PWM_forward_Rmotor);
